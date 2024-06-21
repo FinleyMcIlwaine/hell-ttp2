@@ -1,0 +1,37 @@
+cabal-version: 3.8
+name: hell-ttp2
+version: 0
+
+common common
+    default-language:
+        GHC2021
+    default-extensions:
+        ImportQualifiedPost
+        BangPatterns
+    build-depends:
+        base
+    ghc-options:
+        -Wall
+        -Wno-x-partial
+
+common common-exe
+    import: common
+    ghc-options:
+        -rtsopts
+        -threaded
+
+executable http2
+    import: common-exe
+    hs-source-dirs:
+        http2
+    main-is:
+        Main.hs
+    other-modules:
+        Client
+      , Server
+    build-depends:
+        http2 >= 5.2.6
+      , network-run
+      , http-types
+      , unliftio
+      , bytestring
